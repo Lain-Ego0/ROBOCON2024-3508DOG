@@ -1,0 +1,69 @@
+******************************************************************************
+(C) Copyright 1992-2015
+Computational Applications and System Integration Inc.
+All rights Reserved.
+******************************************************************************
+
+Job:C:\Users\Administrator\Desktop\毕设\四足机器人三维图\腿左前右后-RHSFM_{运动算例 1}	at:Thu Apr 28 23:45:38 2022
+
+
+	Degrees of Freedom: 42822
+		DOFs per node = 6 {1,2,3,4,5,6}
+		ALL_NODE_EXT_SAME = FALSE
+	Single Point Constraints: 0
+	Multipoint Constraints: 12
+	Elements: 7675 (0d Elements:0;1d Elements:2;2d Elements:0;3d Elements:7673)
+		Assembled: 7675
+		Implicit: 0
+
+		 Type	   Number
+		 ----	---------
+		    4	         2
+		   92	      7673
+
+		 Contact Elements(12,26,48,49,52): 0
+	Nodes: 13954
+	Number of Load Cases: 1
+
+	Nonzeros in Upper Triangular part of
+	             Global Stiffness Matrix : 1610352
+	Nonzeros in Preconditioner: 958774
+		*** Precond Reorder: MLD ***
+		*** Matrix changed: Yes ***
+		Nonzeros in V: 242091
+		Nonzeros in factor: 628159
+	*** Primal Preconditioner Activated ***
+	*** Edgeweight Selector: L2 distance ***
+		VTAeV: 0 Sec
+	*** Iterative Solver: CG ***
+
+	Total Operation Count: 1.21631e+10
+	Total Iterations In PCG: 1114
+	Average Iterations Per Load Case: 1114.000000
+	Input PCG Error Tolerance: 1e-07
+	Achieved PCG Error Tolerance: 8.28311e-09
+
+	DETAILS OF SOLVER CP TIME(secs)		Elapsed
+		Assembly			0
+		Preconditioner Construction	0
+		Preconditioner Factoring	0
+		Preconditioned CG		3
+******************************************************************************
+	Total PCG Solver Elapsed Time: 3 secs
+******************************************************************************
+	Available Physical Memory (RAM) : 3271.73 MB
+	Estimate of Memory Usage In CG : 23.1939 MB
+	Estimate of Disk Usage   : 25.0804 MB
+	CG Working Set Size with matrix outofcore : 7.88709 MB
+******************************************************************************
+	Multiply with A MFLOP Rate:7080.32 MFlops
+	Solve With Precond MFLOP Rate:2136.15 MFlops
+******************************************************************************
+	*** Parallel Processing activated ***
+		Processors: 8
+		Compute Threads: 8
+		IO Threads: 1
+		Threads in ThreadPool: 8
+******************************************************************************
+	Total Elapsed Time (Secs): 3
+******************************************************************************
