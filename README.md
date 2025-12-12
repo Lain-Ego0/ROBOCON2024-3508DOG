@@ -1,5 +1,5 @@
 # ROBOCON2024-3508DOG
-3508 Quadruped Robot Based on Hubei University of Technology Framework, Controlled by DJI Remote.![1016496061333948](./README.assets/1016496061333948.jpg)
+Initial version developed by MTI Robotics Team, Fujian University of Technology in 2022. Iterated in 2022-2024, this DJI 3508-powered quadruped robot supports control via DJI DT7+DR16 receiver or computer keyboard (with DT7 as signal transmitter).![1016496061333948](./README.assets/1016496061333948.jpg)
 
 ## 🚀 Project Overview
 
@@ -148,7 +148,7 @@ float Ttabu8[8]={0,39,52,93,111,30,-8,-17};
 **Modification Date: 2024/6/30**
 
 # ROBOCON2024-3508DOG
-基于湖工大框架的3508机械狗，DJI遥控。![1016496061333948](./README.assets/1016496061333948.jpg)
+由福建理工大学MTI机器人队于2022年设计初版，2022、2023、2024迭代，使用大疆3508电机的机械狗。可通过大疆DT7+DR16接收机或者使用DT7作为信号发射器通过电脑键盘遥控。![1016496061333948](./README.assets/1016496061333948.jpg)
 
 ## 🚀 项目简介
 
