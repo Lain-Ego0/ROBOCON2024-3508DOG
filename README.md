@@ -1,5 +1,154 @@
 # ROBOCON2024-3508DOG
-基于湖工大框架的3508机械狗，DJI遥控。
+3508 Quadruped Robot Based on Hubei University of Technology Framework, Controlled by DJI Remote.![1016496061333948](./README.assets/1016496061333948.jpg)
+
+## 🚀 Project Overview
+
+This project originated from the F427 basic architecture of the Robocon 2020 chassis, and officially transformed into a **quadruped robot** control program architecture after version V1.0. The core objectives are to achieve stable standing, gait control, sensor fusion of the quadruped robot, and ultimately realize autonomous or remote-controlled movement in track environments.
+
+## 📜 Version Iteration Records
+
+### Phase 1: Basic Chassis Architecture (V0.x)
+
+The goal of this phase is to build a clean and stable F427 underlying platform to provide a solid foundation for subsequent complex robot projects.
+
+| Version | Description | Main Features/Modifications |
+| :--- | :--- | :--- |
+| **V0.0** | Establishment of basic blank architecture | Based on the Robocon 2020 chassis, removed redundant functions, fixed warnings, and built the F427 underlying architecture. |
+| **V0.1** | Code standardization | Modified most function names for ease of use; improved functions; completed comments. |
+| **V0.2** | RC/Keyboard control integration | Modified the `remote` file and added keyboard control options (requires RoboMaster client). |
+| **V0.3** | LiDAR integration | Added LiDAR module, connected to **Serial Port 6**. |
+| **V0.4** | Preliminary integration of positioning system (WiFi) | Added positioning system functions; `Rabbit` structure; WiFi reception (Serial Port 7); zero reset transmission (Serial Port 8). |
+| **V0.5** | Chassis rotation and self-made remote control | Optimized chassis rotation; added self-made 2.4G remote control (**Serial Port 2**). |
+| **V0.6** | Hardware upgrade of positioning system | Removed WiFi, added RS485 absolute encoder base-axis positioning system based on C8T6 (**Serial Port 7**). |
+
+-----
+
+### Phase 2: Quadruped Robot Architecture (V1.x - V2.x)
+
+This phase is the core of the project, focusing on the implementation of motion control, balance, and gait algorithms for the quadruped robot.
+
+| Version | Description | Main Features/Modifications |
+| :--- | :--- | :--- |
+| **V1.0** | **Project transformation and motor allocation** | **Established the program with quadruped robot as the core project**, and allocated motors for each joint. |
+| **V1.1** | **PID library and function reconstruction** | Modified the original function `M3508_ParaInit(void)` to:<br>**`M3508_ParaInit(Leg_speed_PID speed[], Leg_position_PID position[])`** to achieve **variable PID**.<br>Added remote control functions and **PID library**. |
+| **V1.2** | Architecture file update | Added underlying architecture files updated to version V0.3. |
+| **V1.3** | Implementation of standing function | Realized the basic **standing function** of the quadruped robot. |
+| **V1.4** | Attitude balance (Gyroscope) | Added **gyroscope-based anti-fall standing function** to achieve basic attitude control. |
+| **V1.5** | Attitude balance (LiDAR) | **Added LiDAR** to maintain a fixed height, aiming to solve the **backward tilting problem** during standing. |
+| **V1.6** | Reconstruction of keyboard control logic | **Modified keyboard control logic** and partial control functions to adapt to quadruped robot movement. |
+| **V1.7** | Gait exploration and frame number measurement | **Started frame number measurement**, and performed incremental adjustments on the basis of balance to **enable walking**. |
+| **V1.8** | Introduction of time frame | Added **time frame** (start of operation) for gait timing control. |
+| **V1.81** | Frame compensation algorithm | Added **frame compensation algorithm** to optimize the smoothness of gait movement. |
+| **V1.9** | Keyboard logic and motion expansion | Modified keyboard logic, added **forward rotation function** (backward rotation to be added), and continued measuring frame angles. |
+| **V2.0** | Logic and behavior optimization | Set sampling monitoring to 8, optimized logic and operation behavior (competition preparation phase). |
+| **V2.1** | Addition of backward gait | **Added backward gait function** to realize the backward movement of the robot. |
+| **V2.2** | Preset height and turning | Added **preset height** and **turning function** (PID for preset state not yet implemented). |
+| **V2.3** | Track testing | Conducted track testing (**differential decision-making and jumping function**). |
+| **V2.4** | Turning optimization | **Modified turning method** with improved speed. |
+| **V2.5** | Track testing and improvement | Track testing improvements: **reduce height** when going down slopes; right turn assigned to Q key (not yet modified). |
+| **infinity** | **Final competition testing** | **Only debugging is performed, no additional algorithms or hardware are added.** Recorded on 2023.7.2 by_kizuna |
+
+-----
+
+## 🛠️ Technical Implementation and Notes
+
+### 1. M3508 Motor Parameter Initialization
+
+In version V1.1, to achieve **variable PID**, the motor initialization function has been reconstructed and can now receive PID structure arrays as parameters, facilitating dynamic switching of control parameters in different gaits or states.
+
+```c
+// V1.1 version function declaration
+void M3508_ParaInit(Leg_speed_PID speed[], Leg_position_PID position[]);
+```
+
+**【Important Note】**
+
+When calling this function with a structure array, you must use the address operator `&` to pass the address of the first element of the array:
+
+```c
+// Example call:
+M3508_ParaInit(&state_kara_speed[0], &state_kara_position[0]);
+```
+
+### 2. Structure Sharing
+
+Structures declared and shared in `.h` files (such as those for PID parameters, remote control data, and positioning data) can be directly used anywhere in the project to ensure data consistency.
+
+## 💡 Maintenance and Messages
+
+This project has undergone a transformation from a basic chassis to a complex quadruped robot, reflecting the relentless efforts and pursuit of excellence of the electronic control team.
+
+> **Message from kizuna (2023 ROBOCON Electronic Control):**
+>
+> **No matter how difficult it is, we refuse to give up. Chasing dreams is exactly the challenge for us** ――《LoveLive!》
+
+> **Message from Liangchen Jason (2024 ROBOCON Electronic Control):**
+>
+> **Improve architecture files, add functions, refine and enhance their capabilities, and carry out version iteration.**
+
+> **Message from Ming (Recorded on 2024.7.8):**
+>
+> **Keep your heart focused on the goal, and with consistent effort day after day, progress is inevitable.**
+
+# Original Turning Data
+// Left Turn
+float go_left1[8]={0,26,42,-18,-99,-106,-49,-2};//
+float go_left2[8]={0,39,52,93,111,30,-8,-17};//
+float go_left3[8]={99,18,-42,-26,0,2,49,106};//
+float go_left4[8]={-111,-93,-52,-39,0,17,8,-30};//
+
+float go_left5[8]={111,83,52,39,0,-17,-8,30};//
+float go_left6[8]={-99,-18,42,26,0,-2,-49,-106};//
+float go_left7[8]={0,-39,-52,-83,-111,-30,8,17};//
+float go_left8[8]={0,-26,-42,18,99,106,49,2};//
+// Right Turn
+float go_right1[8]={0,-2,-49,-106,-99,-18,42,26};//
+float go_right2[8]={0,-17,-8,30,111,93,52,39};
+float go_right3[8]={99,106,49,2,0,-26,-42,18};
+float go_right4[8]={-111,-30,8,17,0,-39,-52,-93};
+
+float go_right5[8]={111,30,-8,-17,0,39,52,83};//
+float go_right6[8]={-99,-106,-49,-2,0,26,42,-18};//
+float go_right7[8]={0,17,8,-30,-111,-83,-52,-39};
+float go_right8[8]={0,2,49,106,99,18,-42,-26};
+
+# New Turning Data (Based on Step State)
+// Left
+float Ttabu1[8]={0,-40,-80,-129,-142,-44,-16,14};
+float Ttabu2[8]={0,-28,-25,11,111,100,52,26};
+float Ttabu3[8]={73,77,39,5,0,-46,-31,19};
+float Ttabu4[8]={-101,-8,18,37,0,-26,-55,-121};
+
+float Ttabu5[8]={73,77,39,5,0,-46,-31,19};
+float Ttabu6[8]={-101,-8,18,37,0,-26,-55,-121};
+float Ttabu7[8]={0,-40,-79,-129,-142,-44,-16,14};
+float Ttabu8[8]={0,-28,-25,11,111,100,52,26};
+
+// Right
+float Ttabu1[8]={0,26,42,-18,-99,-106,-49,-2};
+float Ttabu2[8]={0,39,52,93,111,30,-8,-17};
+float Ttabu3[8]={100,75,50,25,0,25,50,75};
+float Ttabu4[8]={-100,-75,-50,-25,0,-25,-50,-75};
+
+float Ttabu5[8]={100,75,50,25,0,25,50,75};
+float Ttabu6[8]={-100,-75,-50,-25,0,-25,-50,-75};
+float Ttabu7[8]={0,26,42,-18,-99,-106,-49,-2};
+float Ttabu8[8]={0,39,52,93,111,30,-8,-17};
+**Modification Date: 2024/6/22**
+// Right
+float Ttabu1[8]={0,26,42,-18,-99,-106,-49,-2};
+float Ttabu2[8]={0,39,52,93,111,30,-8,-17};
+float Ttabu3[8]={100,8,-16,36,0,26,54,115};
+float Ttabu4[8]={-100,-90,-49,-5,0,46,31,-19};
+
+float Ttabu5[8]={100,8,-16,36,0,26,54,115};
+float Ttabu6[8]={-100,-90,-49,-5,0,46,31,-19};
+float Ttabu7[8]={0,26,42,-18,-99,-106,-49,-2};
+float Ttabu8[8]={0,39,52,93,111,30,-8,-17};
+**Modification Date: 2024/6/30**
+
+# ROBOCON2024-3508DOG
+基于湖工大框架的3508机械狗，DJI遥控。![1016496061333948](./README.assets/1016496061333948.jpg)
 
 ## 🚀 项目简介
 
@@ -89,7 +238,6 @@ M3508_ParaInit(&state_kara_speed[0], &state_kara_position[0]);
 > **詺 (2024.7.8 记录) 寄语:**
 >
 > **心有所向，日复一日，必有精进。**
-
 # 原转弯数据
 //左转
 float go_left1[8]={0,26,42,-18,-99,-106,-49,-2};//
@@ -133,7 +281,7 @@ float Ttabu5[8]={100,75,50,25,0,25,50,75};
 float Ttabu6[8]={-100,-75,-50,-25,0,-25,-50,-75};
 float Ttabu7[8]={0,26,42,-18,-99,-106,-49,-2};
 float Ttabu8[8]={0,39,52,93,111,30,-8,-17};
-修改时间2024/6/22
+**修改时间2024/6/22**
 //Right
 float Ttabu1[8]={0,26,42,-18,-99,-106,-49,-2};
 float Ttabu2[8]={0,39,52,93,111,30,-8,-17};
@@ -144,4 +292,4 @@ float Ttabu5[8]={100,8,-16,36,0,26,54,115};
 float Ttabu6[8]={-100,-90,-49,-5,0,46,31,-19};
 float Ttabu7[8]={0,26,42,-18,-99,-106,-49,-2};
 float Ttabu8[8]={0,39,52,93,111,30,-8,-17};
-修改时间2024/6/30
+**修改时间2024/6/30**

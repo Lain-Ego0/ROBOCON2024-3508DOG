@@ -1,8 +1,0 @@
-Solver 0.000 Linear-static-solver-Start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Solver 0.000 Loading-and-preparing-input-data-Start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Solver 0.260 Loading-and-preparing-input-data-End 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Solver 0.260 Computing-load-vector-Start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Solver 0.300 Computing-load-vector-End 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Solver 0.440 Computing-element-stiffness-matrix-Start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Solver 0.670 Computing-element-stiffness-matrix-End 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-Solver 5.340 Computing-reaction-forces-for-load-case(LCASE)=1-Start 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
